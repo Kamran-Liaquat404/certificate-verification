@@ -3,11 +3,28 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Liaquat Tech Studio | Official Certificate Verification</title>
+<title>Liaquat Tech Studio | Certificate Verification</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
+
+/* ========================
+   ROOT VARIABLES (EDIT HERE)
+======================== */
+:root{
+  --primary:#2563eb;
+  --primary-dark:#1e40af;
+  --success:#22c55e;
+  --danger:#ef4444;
+  --bg-dark:#0f172a;
+  --card-bg:rgba(255,255,255,0.07);
+  --text-light:#e2e8f0;
+  --text-muted:#94a3b8;
+}
+
+/* ======================== */
+
 *{
   margin:0;
   padding:0;
@@ -17,115 +34,90 @@
 
 body{
   min-height:100vh;
+  background:linear-gradient(135deg,#0f172a,#1e293b);
   display:flex;
   justify-content:center;
   align-items:center;
-  background:linear-gradient(135deg,#0f172a,#0f2027,#1e293b);
-  padding:20px;
+  padding:15px;
+  color:var(--text-light);
 }
 
 .container{
   width:100%;
-  max-width:540px;
-  padding:40px;
-  border-radius:24px;
-  background:rgba(255,255,255,0.08);
-  backdrop-filter:blur(18px);
+  max-width:500px;
+  padding:30px 25px;
+  border-radius:22px;
+  background:var(--card-bg);
+  backdrop-filter:blur(20px);
   border:1px solid rgba(255,255,255,0.1);
-  box-shadow:0 20px 60px rgba(0,0,0,0.5);
-  color:#fff;
-  text-align:center;
+  box-shadow:0 15px 40px rgba(0,0,0,0.4);
   transition:0.3s ease;
 }
 
-.container:hover{
-  transform:translateY(-5px);
-}
-
 h1{
-  font-size:24px;
+  font-size:clamp(20px,4vw,24px);
   font-weight:700;
-  letter-spacing:1px;
+  text-align:center;
 }
 
 .subtitle{
+  text-align:center;
   font-size:13px;
-  margin:10px 0 30px;
-  color:#cbd5e1;
+  margin:10px 0 25px;
+  color:var(--text-muted);
 }
 
+/* INPUT */
 input{
   width:100%;
-  padding:16px;
+  padding:14px;
   border-radius:14px;
-  border:1px solid rgba(255,255,255,0.2);
+  border:1px solid rgba(255,255,255,0.15);
   background:rgba(255,255,255,0.05);
   color:#fff;
   font-size:14px;
-  margin-bottom:20px;
+  margin-bottom:18px;
   transition:0.3s;
-}
-
-input::placeholder{
-  color:#94a3b8;
 }
 
 input:focus{
   outline:none;
-  border-color:#3b82f6;
-  box-shadow:0 0 0 3px rgba(59,130,246,0.2);
+  border-color:var(--primary);
+  box-shadow:0 0 0 3px rgba(37,99,235,0.2);
 }
 
+/* BUTTON */
 button{
   width:100%;
-  padding:16px;
+  padding:14px;
   border:none;
   border-radius:14px;
   font-size:15px;
   font-weight:600;
   cursor:pointer;
-  background:linear-gradient(135deg,#2563eb,#1d4ed8);
+  background:var(--primary);
   color:#fff;
   transition:0.3s;
-  position:relative;
 }
 
 button:hover{
-  transform:translateY(-2px);
-  box-shadow:0 15px 30px rgba(37,99,235,0.4);
+  background:var(--primary-dark);
 }
 
-button:active{
-  transform:scale(0.98);
+button:disabled{
+  opacity:0.6;
+  cursor:not-allowed;
 }
 
-.loader{
-  width:18px;
-  height:18px;
-  border:3px solid #fff;
-  border-top:3px solid transparent;
-  border-radius:50%;
-  animation:spin 1s linear infinite;
-  display:none;
-  position:absolute;
-  right:20px;
-  top:50%;
-  transform:translateY(-50%);
-}
-
-@keyframes spin{
-  to{ transform:translateY(-50%) rotate(360deg); }
-}
-
+/* RESULT CARD */
 #resultCard{
-  margin-top:30px;
-  padding:25px;
-  border-radius:20px;
+  margin-top:25px;
+  padding:20px;
+  border-radius:18px;
+  background:rgba(255,255,255,0.06);
+  border:1px solid rgba(255,255,255,0.1);
   display:none;
-  text-align:left;
-  background:rgba(255,255,255,0.1);
-  border:1px solid rgba(255,255,255,0.15);
-  animation:fadeIn 0.4s ease;
+  animation:fadeIn 0.3s ease;
 }
 
 @keyframes fadeIn{
@@ -134,35 +126,39 @@ button:active{
 }
 
 .status{
-  font-size:16px;
+  font-size:15px;
   font-weight:600;
-  margin-bottom:15px;
+  margin-bottom:12px;
 }
 
-.verified{ color:#22c55e; }
-.invalid{ color:#ef4444; }
+.verified{ color:var(--success); }
+.invalid{ color:var(--danger); }
 
 #resultCard p{
   font-size:14px;
   margin:6px 0;
-  color:#e2e8f0;
 }
 
 .description{
-  margin-top:15px;
-  padding:15px;
-  border-radius:12px;
-  background:rgba(255,255,255,0.08);
+  margin-top:12px;
   font-size:13px;
   line-height:1.6;
-  color:#cbd5e1;
+  color:var(--text-muted);
 }
 
 footer{
-  margin-top:30px;
+  text-align:center;
+  margin-top:25px;
   font-size:12px;
-  color:#94a3b8;
+  color:var(--text-muted);
 }
+
+@media(max-width:400px){
+  .container{
+    padding:25px 18px;
+  }
+}
+
 </style>
 </head>
 
@@ -171,110 +167,113 @@ footer{
 <div class="container">
 
 <h1>Liaquat Tech Studio</h1>
-<div class="subtitle">Official Digital Certificate Verification Portal</div>
+<div class="subtitle">Official Certificate Verification Portal</div>
 
 <input type="text"
        id="didInput"
-       placeholder="Enter Certificate ID (DID-BC-202600-000)"
-       pattern="DID-[A-Z]{2}-[0-9]{6}-[0-9]{3}">
+       placeholder="Enter Certificate ID (DID-BC-202600-000)">
 
-<button onclick="verifyDID()" id="verifyBtn">
-Verify Certificate
-<div class="loader" id="loader"></div>
-</button>
+<button id="verifyBtn">Verify Certificate</button>
 
 <div id="resultCard">
 <div id="resultStatus" class="status"></div>
-
-<p><strong>Student Name:</strong> <span id="resultName"></span></p>
+<p><strong>Name:</strong> <span id="resultName"></span></p>
 <p><strong>Certificate ID:</strong> <span id="resultDID"></span></p>
 <p><strong>Course:</strong> <span id="resultCourse"></span></p>
-
 <div id="resultDescription" class="description"></div>
 </div>
 
 <footer>
-© <span id="year"></span> Liaquat Tech Studio | All Rights Reserved
+© <span id="year"></span> Liaquat Tech Studio
 </footer>
 
 </div>
 
 <script>
+
+/* ========================
+   EASY EDIT SETTINGS
+======================== */
+const SETTINGS={
+  institutionName:"Liaquat Tech Studio",
+  databaseFile:"studentdit.json"
+};
+/* ======================== */
+
 document.getElementById("year").innerText=new Date().getFullYear();
 
-const jsonUrl='studentdit.json?v='+new Date().getTime();
+const elements={
+  input:document.getElementById("didInput"),
+  button:document.getElementById("verifyBtn"),
+  card:document.getElementById("resultCard"),
+  status:document.getElementById("resultStatus"),
+  name:document.getElementById("resultName"),
+  did:document.getElementById("resultDID"),
+  course:document.getElementById("resultCourse"),
+  desc:document.getElementById("resultDescription")
+};
 
-document.getElementById("didInput").addEventListener("keypress",function(e){
-if(e.key==="Enter"){ verifyDID(); }
+elements.button.addEventListener("click",verifyDID);
+elements.input.addEventListener("keypress",e=>{
+  if(e.key==="Enter") verifyDID();
 });
 
 async function verifyDID(){
 
-const input=document.getElementById("didInput").value.trim().toUpperCase();
-const resultCard=document.getElementById("resultCard");
-const status=document.getElementById("resultStatus");
-const name=document.getElementById("resultName");
-const did=document.getElementById("resultDID");
-const course=document.getElementById("resultCourse");
-const desc=document.getElementById("resultDescription");
-const loader=document.getElementById("loader");
-const btn=document.getElementById("verifyBtn");
+const inputValue=elements.input.value.trim().toUpperCase();
 
-if(!input){
-alert("Please enter your Certificate ID.");
+if(!inputValue){
+alert("Please enter Certificate ID");
 return;
 }
 
-loader.style.display="block";
-btn.disabled=true;
-
-status.innerText="Checking official database...";
-status.className="status";
-resultCard.style.display="block";
+elements.button.disabled=true;
+elements.status.innerText="Checking database...";
+elements.status.className="status";
+elements.card.style.display="block";
 
 try{
-const response=await fetch(jsonUrl);
+
+const response=await fetch(SETTINGS.databaseFile+"?v="+Date.now());
 const data=await response.json();
-const student=data.find(s=>s.did.trim().toUpperCase()===input);
+
+const student=data.find(s=>s.did.toUpperCase()===inputValue);
 
 if(student){
 
-status.innerText="✔ VERIFIED CERTIFICATE";
-status.classList.add("verified");
+elements.status.innerText="✔ VERIFIED CERTIFICATE";
+elements.status.classList.add("verified");
 
-name.innerText=student.name;
-did.innerText=student.did;
-course.innerText=student.course;
+elements.name.innerText=student.name;
+elements.did.innerText=student.did;
+elements.course.innerText=student.course;
 
-desc.innerHTML=`
-This certificate is officially issued by Liaquat Tech Studio.
-The credential confirms successful completion of the program.
-
-Verification Timestamp:
-${new Date().toLocaleString()}
-`;
+elements.desc.innerText=
+"This certificate is officially issued and verified by "+SETTINGS.institutionName+
+". Verification Time: "+new Date().toLocaleString();
 
 }else{
 
-status.innerText="✖ INVALID CERTIFICATE";
-status.classList.add("invalid");
+elements.status.innerText="✖ INVALID CERTIFICATE";
+elements.status.classList.add("invalid");
 
-name.innerText="";
-did.innerText="";
-course.innerText="";
+elements.name.innerText="";
+elements.did.innerText="";
+elements.course.innerText="";
+elements.desc.innerText=
+"The provided Certificate ID was not found in our official records.";
 
-desc.innerHTML="The provided Certificate ID does not exist in our official records. Please verify and try again.";
 }
 
 }catch(error){
-alert("Database not found. Upload studentdit.json properly.");
+alert("Database file missing. Upload "+SETTINGS.databaseFile);
 console.error(error);
 }
 
-loader.style.display="none";
-btn.disabled=false;
+elements.button.disabled=false;
 }
+
 </script>
 
 </body>
-  </html>
+</html>
