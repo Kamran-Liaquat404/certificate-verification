@@ -8,36 +8,58 @@
   body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0; padding: 0;
-    background: linear-gradient(to bottom right, #e0f7fa, #ffffff);
+    background: linear-gradient(135deg, #00c6ff, #0072ff);
     display: flex; justify-content: center; align-items: center;
     min-height: 100vh;
+    color: #fff;
   }
   .container {
-    background: white; padding: 30px;
+    background: #1b2735;
+    padding: 30px;
     border-radius: 15px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-    width: 90%; max-width: 400px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    width: 90%; max-width: 450px;
     text-align: center;
   }
-  h1 { color: #004d40; margin-bottom: 5px; font-size: 24px; }
-  p.subtitle { color: #00796b; font-size: 14px; margin: 5px 0 20px; }
+  h1 { color: #00e5ff; margin-bottom: 5px; font-size: 28px; }
+  p.subtitle { color: #a0f7ff; font-size: 14px; margin: 5px 0 20px; }
 
   input[type="text"] {
     width: 90%; padding: 12px;
-    border-radius: 8px; border: 1px solid #b2dfdb;
+    border-radius: 8px; border: none;
     margin-bottom: 15px; font-size: 14px;
   }
   button {
-    padding: 12px 25px; background-color: #00796b;
+    padding: 12px 25px; background: linear-gradient(90deg, #00e5ff, #0072ff);
     color: white; border: none; border-radius: 8px;
     cursor: pointer; font-size: 14px; transition: 0.3s;
   }
-  button:hover { background-color: #004d40; }
+  button:hover { background: linear-gradient(90deg, #0072ff, #00e5ff); }
 
-  h3#result { margin-top: 20px; font-size: 16px; }
-  footer { margin-top: 25px; font-size: 12px; color: #555; }
-  footer a { color: #00796b; text-decoration: none; }
+  h3#result {
+    margin-top: 20px;
+    font-size: 16px;
+    padding: 10px;
+    border-radius: 8px;
+    background: rgba(255,255,255,0.1);
+  }
+
+  footer {
+    margin-top: 25px;
+    font-size: 12px;
+    color: #a0f7ff;
+  }
+  footer a {
+    color: #00e5ff;
+    text-decoration: none;
+  }
   footer a:hover { text-decoration: underline; }
+
+  /* Responsive */
+  @media (max-width: 480px) {
+    h1 { font-size: 22px; }
+    button { width: 100%; }
+  }
 </style>
 </head>
 <body>
@@ -47,7 +69,7 @@
   <p class="subtitle">Founder: Kamran Liaquat</p>
   <p class="subtitle">Verify your certificate instantly</p>
 
-  <input type="text" id="didInput" placeholder="Enter your DID e.g. DID-BC-20260303-001">
+  <input type="text" id="didInput" placeholder="Enter your DID e.g. DID-BC-00000-000">
   <br>
   <button onclick="verifyDID()">Verify Certificate</button>
 
@@ -63,12 +85,12 @@
 const csvUrl = "https://docs.google.com/spreadsheets/d/1cIfJ3FMoRi1wThjZBza6xEth0f9X56LjVcLTHem6Yf4/gviz/tq?tqx=out:csv";
 
 async function verifyDID() {
-  const input = document.getElementById("didInput").value.trim();
+  const input = document.getElementById("didInput").value.replace(/"/g,'').trim();
   const result = document.getElementById("result");
 
   if(!input) {
     result.innerHTML = "❌ Please enter DID";
-    result.style.color = "red";
+    result.style.color = "#ff6b6b";
     return;
   }
 
@@ -77,21 +99,24 @@ async function verifyDID() {
     const data = await response.text();
 
     const rows = data.split("\n").slice(1); // skip header
-    const didList = rows.map(r => r.split(",")[6].trim());
+    // map DID column (ignore quotes & spaces)
+    const didList = rows.map(r => r.split(",")[6]?.replace(/"/g,'').trim());
 
     if(didList.includes(input)) {
-      const row = rows.find(r => r.split(",")[6].trim() === input);
+      const row = rows.find(r => r.split(",")[6]?.replace(/"/g,'').trim() === input);
       const details = row.split(",");
       result.innerHTML = `✅ VERIFIED<br>Name: ${details[1]}<br>Course: ${details[3]}`;
-      result.style.color = "green";
+      result.style.color = "#00ff99";
+      result.style.background = "rgba(0,255,153,0.1)";
     } else {
       result.innerHTML = "❌ INVALID CERTIFICATE";
-      result.style.color = "red";
+      result.style.color = "#ff6b6b";
+      result.style.background = "rgba(255,107,107,0.1)";
     }
 
   } catch (error) {
     result.innerHTML = "❌ Error fetching data";
-    result.style.color = "red";
+    result.style.color = "#ff6b6b";
     console.error(error);
   }
 }
@@ -100,10 +125,10 @@ async function verifyDID() {
 const urlParams = new URLSearchParams(window.location.search);
 const didParam = urlParams.get('id');
 if(didParam) {
-  document.getElementById("didInput").value = didParam;
+  document.getElementById("didInput").value = didParam.replace(/"/g,'').trim();
   verifyDID();
 }
 </script>
 
 </body>
-  </html>
+</html>
