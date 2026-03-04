@@ -3,110 +3,165 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Liaquat Tech Studio | Certificate Verification</title>
+<title>Liaquat Tech Studio | Official Certificate Verification</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
-body {
-  margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Inter', sans-serif;
 }
 
-.container {
-  background: #ffffff;
-  width: 95%;
-  max-width: 500px;
-  padding: 30px;
-  border-radius: 18px;
-  box-shadow: 0 15px 35px rgba(0,0,0,0.3);
-  text-align: center;
+body{
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:linear-gradient(135deg,#0f172a,#0f2027,#1e293b);
+  padding:20px;
 }
 
-h1 {
-  margin: 0;
-  color: #0f2027;
+.container{
+  width:100%;
+  max-width:540px;
+  padding:40px;
+  border-radius:24px;
+  background:rgba(255,255,255,0.08);
+  backdrop-filter:blur(18px);
+  border:1px solid rgba(255,255,255,0.1);
+  box-shadow:0 20px 60px rgba(0,0,0,0.5);
+  color:#fff;
+  text-align:center;
+  transition:0.3s ease;
 }
 
-.subtitle {
-  font-size: 14px;
-  color: #555;
-  margin-bottom: 20px;
+.container:hover{
+  transform:translateY(-5px);
 }
 
-input {
-  width: 100%;
-  padding: 14px;
-  border-radius: 10px;
-  border: 1px solid #ccc;
-  margin-bottom: 15px;
-  font-size: 14px;
-  transition: 0.3s;
+h1{
+  font-size:24px;
+  font-weight:700;
+  letter-spacing:1px;
 }
 
-input:focus {
-  border-color: #2c5364;
-  outline: none;
+.subtitle{
+  font-size:13px;
+  margin:10px 0 30px;
+  color:#cbd5e1;
 }
 
-button {
-  width: 100%;
-  padding: 14px;
-  border: none;
-  border-radius: 10px;
-  background: #2c5364;
-  color: #fff;
-  font-size: 15px;
-  cursor: pointer;
-  transition: 0.3s;
+input{
+  width:100%;
+  padding:16px;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,0.2);
+  background:rgba(255,255,255,0.05);
+  color:#fff;
+  font-size:14px;
+  margin-bottom:20px;
+  transition:0.3s;
 }
 
-button:hover {
-  background: #203a43;
+input::placeholder{
+  color:#94a3b8;
 }
 
-#resultCard {
-  margin-top: 25px;
-  padding: 20px;
-  border-radius: 15px;
-  display: none;
-  text-align: left;
-  background: #f8f9fa;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+input:focus{
+  outline:none;
+  border-color:#3b82f6;
+  box-shadow:0 0 0 3px rgba(59,130,246,0.2);
 }
 
-.status {
-  font-weight: bold;
-  margin-bottom: 10px;
-  font-size: 16px;
+button{
+  width:100%;
+  padding:16px;
+  border:none;
+  border-radius:14px;
+  font-size:15px;
+  font-weight:600;
+  cursor:pointer;
+  background:linear-gradient(135deg,#2563eb,#1d4ed8);
+  color:#fff;
+  transition:0.3s;
+  position:relative;
 }
 
-.verified {
-  color: #0a7d33;
+button:hover{
+  transform:translateY(-2px);
+  box-shadow:0 15px 30px rgba(37,99,235,0.4);
 }
 
-.invalid {
-  color: #c0392b;
+button:active{
+  transform:scale(0.98);
 }
 
-.description {
-  font-size: 14px;
-  margin-top: 10px;
-  color: #333;
+.loader{
+  width:18px;
+  height:18px;
+  border:3px solid #fff;
+  border-top:3px solid transparent;
+  border-radius:50%;
+  animation:spin 1s linear infinite;
+  display:none;
+  position:absolute;
+  right:20px;
+  top:50%;
+  transform:translateY(-50%);
 }
 
-footer {
-  margin-top: 20px;
-  font-size: 12px;
-  color: #777;
+@keyframes spin{
+  to{ transform:translateY(-50%) rotate(360deg); }
 }
 
-footer a {
-  text-decoration: none;
-  color: #2c5364;
+#resultCard{
+  margin-top:30px;
+  padding:25px;
+  border-radius:20px;
+  display:none;
+  text-align:left;
+  background:rgba(255,255,255,0.1);
+  border:1px solid rgba(255,255,255,0.15);
+  animation:fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn{
+  from{opacity:0; transform:translateY(10px);}
+  to{opacity:1; transform:translateY(0);}
+}
+
+.status{
+  font-size:16px;
+  font-weight:600;
+  margin-bottom:15px;
+}
+
+.verified{ color:#22c55e; }
+.invalid{ color:#ef4444; }
+
+#resultCard p{
+  font-size:14px;
+  margin:6px 0;
+  color:#e2e8f0;
+}
+
+.description{
+  margin-top:15px;
+  padding:15px;
+  border-radius:12px;
+  background:rgba(255,255,255,0.08);
+  font-size:13px;
+  line-height:1.6;
+  color:#cbd5e1;
+}
+
+footer{
+  margin-top:30px;
+  font-size:12px;
+  color:#94a3b8;
 }
 </style>
 </head>
@@ -114,96 +169,110 @@ footer a {
 <body>
 
 <div class="container">
-  <h1>Liaquat Tech Studio</h1>
-  <div class="subtitle">Official Certificate Verification Portal</div>
 
-  <input type="text" id="didInput" placeholder="Enter your DID (Example: DID-BC-202600-000)">
-  <button onclick="verifyDID()">Verify Certificate</button>
+<h1>Liaquat Tech Studio</h1>
+<div class="subtitle">Official Digital Certificate Verification Portal</div>
 
-  <div id="resultCard">
-    <div id="resultStatus" class="status"></div>
-    <p><strong>Student Name:</strong> <span id="resultName"></span></p>
-    <p><strong>Certificate ID:</strong> <span id="resultDID"></span></p>
-    <p><strong>Course:</strong> <span id="resultCourse"></span></p>
-    <div id="resultDescription" class="description"></div>
-  </div>
+<input type="text"
+       id="didInput"
+       placeholder="Enter Certificate ID (DID-BC-202600-000)"
+       pattern="DID-[A-Z]{2}-[0-9]{6}-[0-9]{3}">
 
-  <footer>
-    © <span id="year"></span> Liaquat Tech Studio | All Rights Reserved
-  </footer>
+<button onclick="verifyDID()" id="verifyBtn">
+Verify Certificate
+<div class="loader" id="loader"></div>
+</button>
+
+<div id="resultCard">
+<div id="resultStatus" class="status"></div>
+
+<p><strong>Student Name:</strong> <span id="resultName"></span></p>
+<p><strong>Certificate ID:</strong> <span id="resultDID"></span></p>
+<p><strong>Course:</strong> <span id="resultCourse"></span></p>
+
+<div id="resultDescription" class="description"></div>
+</div>
+
+<footer>
+© <span id="year"></span> Liaquat Tech Studio | All Rights Reserved
+</footer>
+
 </div>
 
 <script>
-document.getElementById("year").innerText = new Date().getFullYear();
+document.getElementById("year").innerText=new Date().getFullYear();
 
-const jsonUrl = 'studentdit.json?v=' + new Date().getTime(); // Prevent caching
+const jsonUrl='studentdit.json?v='+new Date().getTime();
 
-async function verifyDID() {
+document.getElementById("didInput").addEventListener("keypress",function(e){
+if(e.key==="Enter"){ verifyDID(); }
+});
 
-  const input = document.getElementById("didInput").value.trim().toUpperCase();
-  const resultCard = document.getElementById("resultCard");
-  const status = document.getElementById("resultStatus");
-  const name = document.getElementById("resultName");
-  const did = document.getElementById("resultDID");
-  const course = document.getElementById("resultCourse");
-  const desc = document.getElementById("resultDescription");
+async function verifyDID(){
 
-  if (!input) {
-    alert("Please enter your DID.");
-    return;
-  }
+const input=document.getElementById("didInput").value.trim().toUpperCase();
+const resultCard=document.getElementById("resultCard");
+const status=document.getElementById("resultStatus");
+const name=document.getElementById("resultName");
+const did=document.getElementById("resultDID");
+const course=document.getElementById("resultCourse");
+const desc=document.getElementById("resultDescription");
+const loader=document.getElementById("loader");
+const btn=document.getElementById("verifyBtn");
 
-  status.innerText = "Checking...";
-  status.className = "status";
-  resultCard.style.display = "block";
+if(!input){
+alert("Please enter your Certificate ID.");
+return;
+}
 
-  try {
+loader.style.display="block";
+btn.disabled=true;
 
-    const response = await fetch(jsonUrl);
-    const data = await response.json();
+status.innerText="Checking official database...";
+status.className="status";
+resultCard.style.display="block";
 
-    const student = data.find(s => s.did.trim().toUpperCase() === input);
+try{
+const response=await fetch(jsonUrl);
+const data=await response.json();
+const student=data.find(s=>s.did.trim().toUpperCase()===input);
 
-    if (student) {
+if(student){
 
-      status.innerText = "✔ VERIFIED CERTIFICATE";
-      status.classList.add("verified");
+status.innerText="✔ VERIFIED CERTIFICATE";
+status.classList.add("verified");
 
-      name.innerText = student.name;
-      did.innerText = student.did;
-      course.innerText = student.course;
+name.innerText=student.name;
+did.innerText=student.did;
+course.innerText=student.course;
 
-      desc.innerHTML = `
-        Congratulations <strong>${student.name}</strong>! 🎉<br><br>
-        This certificate confirms the successful completion of the 
-        <strong>${student.course}</strong> program at Liaquat Tech Studio.
-        <br><br>
-        The credential is officially issued and can be verified anytime 
-        using the unique Certificate ID mentioned above.
-        <br><br>
-        We wish you continued success in your professional journey.
-      `;
+desc.innerHTML=`
+This certificate is officially issued by Liaquat Tech Studio.
+The credential confirms successful completion of the program.
 
-    } else {
+Verification Timestamp:
+${new Date().toLocaleString()}
+`;
 
-      status.innerText = "✖ INVALID CERTIFICATE";
-      status.classList.add("invalid");
+}else{
 
-      name.innerText = "";
-      did.innerText = "";
-      course.innerText = "";
+status.innerText="✖ INVALID CERTIFICATE";
+status.classList.add("invalid");
 
-      desc.innerHTML = `
-        The provided Certificate ID could not be found in our official records.
-        <br><br>
-        Please check the DID carefully and try again.
-      `;
-    }
+name.innerText="";
+did.innerText="";
+course.innerText="";
 
-  } catch (error) {
-    alert("Unable to load student database. Please ensure studentdit.json is uploaded correctly.");
-    console.error(error);
-  }
+desc.innerHTML="The provided Certificate ID does not exist in our official records. Please verify and try again.";
+}
+
+}catch(error){
+alert("Database not found. Upload studentdit.json properly.");
+console.error(error);
+}
+
+loader.style.display="none";
+btn.disabled=false;
 }
 </script>
 
